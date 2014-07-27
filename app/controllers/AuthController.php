@@ -26,6 +26,13 @@ class AuthController extends BaseController{
             return Redirect::route('login')->withErrors(array('Invalid username or password'));
         }
         
+        // Rehash if needed
+        $hashed = $user->password;
+        if(Hash::needsRehash($hashed, array("rounds" => Config::get("xmail")["hash_rounds"]))){
+            $user->password = Hash::make(Input::get('password'), array("rounds" => Config::get("xmail")["hash_rounds"]));
+            $user->save();
+        }
+        
         return Redirect::route('home');
     }
     
@@ -75,7 +82,7 @@ class AuthController extends BaseController{
             }
         }
         
-        $hashed = Hash::make(Input::get('password'));
+        $hashed = Hash::make(Input::get('password'), array('rounds' => Config::get("xmail")["hash_rounds"]));
         $mcUser->name = $mcname;
         $mcUser->email = Input::get('email');
         $mcUser->password = $hashed;
@@ -85,7 +92,8 @@ class AuthController extends BaseController{
         $code = sha1($mcuuid . time());
         $code = substr($code, 0, 16);
         $mcUser->register_token = $code;
-        $user->register_token_create = time();
+        $now = new DateTime();
+        $mcUser->register_token_create = $now->setTimestamp(time());
         Session::put("registercode", $code);
         Session::put("codefor", $mcuuid);
         
@@ -118,8 +126,11 @@ class AuthController extends BaseController{
         // Generate a new registration code
         $code = sha1($user->uuid . time());
         $code = substr($code, 0, 16);
-        $user->register_token = $code;
-        $user->register_token_create = time();
+        $user->register_token = $code;        
+        $now = new DateTime();
+        $now->setTimestamp(time());
+        $user->register_token_create = $now;
+
         
         if(Session::has("registercode") && Session::get("codefor") == $user->uuid){
             Session::put("registercode", $code);
