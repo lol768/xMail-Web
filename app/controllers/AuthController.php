@@ -8,6 +8,8 @@ class AuthController extends BaseController{
         $rules = array('username' => 'required', 'password' => 'required');
         $validator = Validator::make(Input::all(), $rules);
         
+        // TODO: THIS IS WRONG
+        
         if($validator->fails()){
             return Redirect::route('login')->withErrors($validator);
         }
