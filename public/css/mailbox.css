@@ -1,0 +1,47 @@
+#mailbox, #mailbox tr{
+    padding: 0px;
+    margin: 0px;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#mailbox tr{
+    border-top: 1px solid #A9D0F5;
+    color: #1C1C1C;
+}
+
+#mailbox tr:last-child{
+    border-bottom: 1px solid #A9D0F5;
+}
+
+#mailbox tr td{
+    padding: 7px;
+    height: 25px;
+}
+
+#mailbox .unread{
+    font-weight: bold;
+}
+
+#mailbox .message-from, #mailbox .message-timestamp{
+    width: 25%;
+}
+
+#mailbox .message-content{
+    width: 50%;
+}
+
+#mailbox .message-timestamp{
+    text-align: right;
+}
+
+#mailbox tr:hover{
+    cursor: pointer;
+}
+
+#mailbox .message-head{
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
