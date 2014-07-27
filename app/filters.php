@@ -22,8 +22,7 @@ App::after(function($request, $response)
 
 Route::filter('checkregcode', function(){
     if(!Session::has('registercode')){
-        Session::put('xmErrors', array('You do not have a registration code!'));
-        return Redirect::route('register');
+        return Redirect::route('register')->with('xmErrors', array('You do not have a registration code!'));
     }
 });
 
@@ -40,24 +39,23 @@ Route::filter('checkregcode', function(){
 
 Route::filter('auth', function()
 {
-	if (Auth::guest())
-	{
-		if (Request::ajax())
-		{
-			return Response::make('Unauthorized', 401);
-		}
-		else
-		{
-            Session::put('xmErrors', array('You need to be logged in to do that!'));
-			return Redirect::route('login');
-		}
-	}
+    if (Auth::guest())
+    {
+        if (Request::ajax())
+        {
+            return Response::make('Unauthorized', 401);
+        }
+        else
+        {
+            return Redirect::route('login')->with('xmErrors', array('You need to be logged in to do that!'));;
+        }
+    }
 });
 
 
 Route::filter('auth.basic', function()
 {
-	return Auth::basic();
+    return Auth::basic();
 });
 
 /*
@@ -73,9 +71,8 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()){
-        Session::put('xmWarnings', array('You are already logged in! Please logout before continuing.'));
-        return Redirect::to('/');
+    if (Auth::check()){
+        return Redirect::route('home')->with('xmWarnings', array('You are already logged in! Please logout before continuing.'));
     }
 });
 
@@ -92,8 +89,8 @@ Route::filter('guest', function()
 
 Route::filter('csrf', function()
 {
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
+    if (Session::token() != Input::get('_token'))
+    {
+        throw new Illuminate\Session\TokenMismatchException;
+    }
 });

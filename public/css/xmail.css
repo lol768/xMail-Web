@@ -279,6 +279,7 @@ input[type=submit]:hover{
     display: table;
     margin: auto;
     margin-top: 10px;
+    width: 890px;
 }
 
 .server{
@@ -295,12 +296,12 @@ input[type=submit]:hover{
 .server .loading{
     width: 64px;
     height: 64px;
-    background: url('http://home.turt2live.com/loading.png');
+    background: url('../images/loading.png');
     background-size: 64px 64px;
     margin: auto;
-    -webkit-animation:spin 8s linear infinite;
-    -moz-animation:spin 8s linear infinite;
-    animation:spin 8s linear infinite;
+    -webkit-animation:spin 2s linear infinite;
+    -moz-animation:spin 2s linear infinite;
+    animation:spin 2s linear infinite;
 }
 @-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
@@ -319,4 +320,45 @@ input[type=submit]:hover{
 
 .server .info .name{
     font-weight: bold;
+}
+
+.aboutbox{
+    float: left;
+    margin: 5px;
+    width: 223px;
+    height: 210px;
+    padding: 5px;
+    border: 1px solid #007DBB;
+    border-radius: 4px;
+}
+
+.aboutbox a{
+    float: right;
+    margin-right: 10px;
+}
+
+.aboutbox .aboutheader{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.aboutbox .aboutcontent{
+    padding: 5px;
+    margin: 0;
+}
+
+.aboutbox img{
+    width: 220px;
+    height: 100px;
+    margin: 5px auto;
+    border: 1px solid #008DD3;
+}
+
+.aboutbox.current{
+    background-color: #CEEEFC;
+}
+
+.aboutbox:hover{
+    cursor: pointer;
+    background-color: #E9F8FF;
 }

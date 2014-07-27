@@ -27,6 +27,7 @@ class ApiController extends BaseController {
             );
         }
         
+        $tokenObj->delete();        
         return json_encode($result);
 	}
 }

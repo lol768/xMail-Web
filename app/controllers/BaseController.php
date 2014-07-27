@@ -49,6 +49,16 @@ class BaseController extends Controller {
         return $user;
     }
     
+    protected function generateServerToken($ip, $port){        
+        $token = new ServerToken();
+        $token->server_ip = $ip;
+        $token->server_port = $port;
+        $token->token = md5($ip . $port . time());
+        $token->save();
+        
+        return $token;
+    }
+    
     protected function validatorToXm($validator){
         return $validator->messages()->all();
     }

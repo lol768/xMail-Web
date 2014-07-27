@@ -19,16 +19,16 @@
                     </a>
                     <nav>
                         <ul>
-                            <li class='first'><a href="{{ URL::route('home') }}">Home</a></li>
-                            <li><a href="{{ URL::route('about') }}">About</a></li>
+                            <li class='first'><a href="{{ URL::route('about') }}">About</a></li>
                             <li><a href="{{ URL::route('download') }}">Download</a></li>
+                            <li><a href="{{ URL::route('servers') }}">Supported Servers</a></li>
                             <li class='last'><a href="{{ URL::route('contact') }}">Contact</a></li>
                             
                             <!-- Reverse order (including first & last classes) -->
                             @if(Auth::check())
                                 <li class='right last'><a href="{{ URL::route('signout') }}">Sign Out</a></li>
                                 <li class='right'><a href="#">My Account</a></li>
-                                <li class='right first'><a href="#">Mail</a></li>
+                                <li class='right first'><a href="{{ URL::route('mailbox') }}">Mail</a></li>
                             @else
                                 <li class='right last'><a href="{{ URL::route('register') }}">Register</a></li>
                                 <li class='right first'><a href="{{ URL::route('login') }}">Login</a></li>
@@ -44,7 +44,6 @@
                         @foreach($source as $error)
                             <p class="alert error">{{ $error }}</p>
                         @endforeach
-                        @if(Session::forget('xmErrors')) @endif
                     @endif
                     
                     @if(Session::has('xmWarnings') || isset($xmWarnings))
@@ -52,7 +51,6 @@
                         @foreach($source as $warning)
                             <p class="alert warning">{{ $warning }}</p>
                         @endforeach
-                        @if(Session::forget('xmWarnings')) @endif
                     @endif
                     
                     @if(Session::has('xmSuccesses') || isset($xmSuccesses))
@@ -60,7 +58,6 @@
                         @foreach($source as $success)
                             <p class="alert success">{{ $success }}</p>
                         @endforeach
-                        @if(Session::forget('xmSuccesses')) @endif
                     @endif
                     
                     @yield('content')

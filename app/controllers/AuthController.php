@@ -8,10 +8,13 @@ class AuthController extends BaseController{
         $rules = array('username' => 'required', 'password' => 'required');
         $validator = Validator::make(Input::all(), $rules);
         
-        // TODO: THIS IS WRONG
-        
         if($validator->fails()){
-            return Redirect::route('login')->withErrors($validator);
+            return Redirect::route('login')->with('xmErrors', $this->validatorToXm($validator));
+        }
+        
+        $user = $this->userByName(Input::get('username'));
+        if(!$user || $user->register_token || !$user->password){
+            return Redirect::route('login')->with('xmErrors', array('That account does not exist or has not been confirmed.'));
         }
         
         $auth = Auth::attempt(array(
@@ -82,6 +85,7 @@ class AuthController extends BaseController{
         $code = sha1($mcuuid . time());
         $code = substr($code, 0, 16);
         $mcUser->register_token = $code;
+        $user->register_token_create = time();
         Session::put("registercode", $code);
         Session::put("codefor", $mcuuid);
         
@@ -115,6 +119,7 @@ class AuthController extends BaseController{
         $code = sha1($user->uuid . time());
         $code = substr($code, 0, 16);
         $user->register_token = $code;
+        $user->register_token_create = time();
         
         if(Session::has("registercode") && Session::get("codefor") == $user->uuid){
             Session::put("registercode", $code);
@@ -150,11 +155,7 @@ class AuthController extends BaseController{
         $servers = array();
         
         foreach($chosen as $server){
-            $token = new ServerToken();
-            $token->server_ip = $server->ip;
-            $token->server_port = $server->port;
-            $token->token = md5($server->ip . $server->port . time());
-            $token->save();
+            $token = $this->generateServerToken($server->ip, $server->port);
             
             $servers[count($servers)] = array(
                 "name" => $server->name,
