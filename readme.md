@@ -7,7 +7,6 @@ This is the xMail website as well as a client-side portal for use by potential "
 * This website is not complete
 * This website may have bugs
 * Any passwords you find are purely development passwords
-* Configuration files are excluded intentionally
 
 ## TODO
 
