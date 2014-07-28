@@ -9,6 +9,8 @@ Route::get('/terms', array('as' => 'terms', 'uses' => 'HomeController@getTerms')
 Route::get('/privacy', array('as' => 'privacy', 'uses' => 'HomeController@getPrivacyPolicy'));
 Route::get('/servers', array('as' => 'servers', 'uses' => 'HomeController@getServers'));
 
+Route::post('/contact', array('uses' => 'HomeController@postContact'))->before('csrf');
+
 Route::get('/about/developers', array('as' => 'about_developers', 'uses' => 'HomeController@getAboutDevelopers'));
 Route::get('/about/owners', array('as' => 'about_owners', 'uses' => 'HomeController@getAboutOwners'));
 Route::get('/about/players', array('as' => 'about_players', 'uses' => 'HomeController@getAboutPlayers'));

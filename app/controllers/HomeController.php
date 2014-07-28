@@ -33,6 +33,39 @@ class HomeController extends BaseController {
 		return View::make('contact');
     }
     
+    public function postContact(){
+        $rules = array("email" => "required|email", "message" => "required");
+        $validator = Validator::make(Input::all(), $rules);
+        
+        if($validator->fails()){
+            return Redirect::route('contact')->with('xmErrors', $this->validatorToXm($validator));
+        }
+        
+        $customerEmail = Input::get("email");
+        $adminEmail = Config::get('xmail')["admin_email"];
+        Mail::queue("emails.customer_contact", array(
+                "email" => Input::get("email"), 
+                "mcname" => Input::get("username"), 
+                "content" => Input::get("message")
+            ), function($message) use ($customerEmail) {
+            $message->to($customerEmail);
+            $message->subject("xMail Contact Request");
+        });
+        Mail::queue("emails.admin_contact", array(
+                "email" => Input::get("email"), 
+                "mcname" => Input::get("username"), 
+                "content" => Input::get("message"),
+                "ip" => Request::getClientIp(),
+                "mcuuid" => Input::get("username") ? $this->uuid(Input::get("username")) : null,
+                "currUser" => Auth::check() ? Auth::user()->name . " / " . Auth::user()->email : null
+            ), function($message) use ($adminEmail) {
+            $message->to($adminEmail);
+            $message->subject("xMail Customer Contact");
+        });
+        
+        return Redirect::route('contact')->with('xmSuccesses', array('Thank you for reaching out. We\'ve sent a copy of your request to your email and to the administrators of xMail.'));
+    }
+    
     public function getDownload(){
 		return View::make('download');
     }

@@ -243,7 +243,7 @@ p.alert.success{
     float: right;
 }
 
-input{
+input, textarea{
     background: white;
     border: 1px solid #007DBB;
     border-radius: 4px;
@@ -251,6 +251,8 @@ input{
     margin: 2px;
     width: 278px;
     background-color: #F5FDFF;
+    font-family: inherit;
+    font-size: inherit;
 }
 
 input[type=submit]{
@@ -263,6 +265,10 @@ input[type=submit]{
 input[type=submit]:hover{
     background-color: #9CDFFF;
     cursor: pointer;
+}
+
+.contact{
+    height: 150px;
 }
 
 .registercode{
