@@ -19,7 +19,7 @@
                     {{ Form::open() }}
                     <input type='text' name='username' placeholder='Minecraft Username' /><br/>
                     <input type='password' name='password' placeholder='xMail Password' /><br/>
-                    <input type='submit' value="Login" />
+                    <input class='button button-flat button-flat-primary' type='submit' value="Login" />
                     {{ Form::close() }}
                 </div>
             </div>

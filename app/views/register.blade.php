@@ -23,7 +23,7 @@
                     <b>Don't use your Minecraft account password!</b><br/>
                     <input type='password' name='password' placeholder='xMail Password' /><br/>
                     <input type='password' name='confpassword' placeholder='Confirm Password' /><br/>
-                    <input type='submit' value="Sign Up" />
+                    <input class='button button-flat button-flat-primary' type='submit' value="Sign Up" />
                     {{ Form::close() }}
                 </div>
             </div>
