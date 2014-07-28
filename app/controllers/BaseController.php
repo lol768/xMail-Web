@@ -33,24 +33,7 @@ class BaseController extends Controller {
     
     // TODO: Perform update operations
     
-    protected function userByUuid($uuid, $findByName=true){
-        $users = User::where('uuid', $uuid)->get();
-        
-        if($users->count() > 1){
-            // Multiple UUIDs? Oh no...
-            $now = new DateTime();
-            $now->setTimestamp(time());
-            foreach($users as $u){
-                // Check that the UUID belongs to this user
-                $expectedUuid = $this->uuid($u->name);
-                if($expectedUuid != $u->uuid){
-                    $u->uuid = $expectedUuid;
-                    $u->uuid_check = $now;
-                    $u->save();
-                }
-            }
-        }
-        
+    protected function userByUuid($uuid, $findByName=true){        
         $user = User::where('uuid', $uuid)->first();
         if(!$user && $findByName){
             $user = $this->userByName($this->name($uuid), false);
