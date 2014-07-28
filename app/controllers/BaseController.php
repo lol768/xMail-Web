@@ -31,8 +31,6 @@ class BaseController extends Controller {
         return false;
     }
     
-    // TODO: Perform update operations
-    
     protected function userByUuid($uuid, $findByName=true){        
         $user = User::where('uuid', $uuid)->first();
         if(!$user && $findByName){

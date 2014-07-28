@@ -11,3 +11,5 @@
 |
 */
 
+Artisan::add(new PurgeRegisterTokensCommand());
+Artisan::add(new NameCheckCommand());

@@ -36,30 +36,6 @@ class ApiController extends BaseController {
         return $user->name . ' ' . $user->uuid;
     }
     
-    public function getPurgeOldCodes($secret){
-        $result = array();
-        
-        if($secret != Config::get('xmail')["api_secret"]){
-            $result = array("status" => "error", "error" => "invalid secret");
-        }else{
-            $set = User::where('register_token_create', '>=', time() - (24 * 60 * 60))->get();
-            $expired = array();
-            foreach($set as $user){
-                $user->register_token = null;
-                $user->register_token_create = null;   
-                $user->password = null;
-                $this->sendRegTokenExpired($user->email);
-                $user->email = null; // Reset as we don't want to have them run into issues at registration
-                $user->save();
-                array_push($expired, array("name" => $user->name, "uuid" => $user->uuid));
-            }
-            $result["expired"] = $expired;
-            $result["status"] = "ok";
-        }
-        
-        return Response::json($result);
-    }
-    
     private function sendRegTokenExpired($email){
         Mail::queue('emails.regexpired', array(), function($message) use ($email){
             $message->to($email);

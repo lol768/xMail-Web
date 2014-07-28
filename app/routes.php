@@ -35,6 +35,5 @@ Route::get('/mailbox/mail', array('as' => 'getMail', 'uses' => 'MailController@g
 // API functions
 Route::get('/api/v1/mcserver/{ip}/{port}/{token}', array('as' => 'mcserver', 'uses' => 'ApiController@getMcServer'));
 Route::get('/api/v1/user/verify/{token}', array('as' => 'userverify', 'uses' => 'ApiController@getRegConfirm'));
-Route::get('/api/v1/user/purgetokens/{secret}', array('as' => 'purgetokens', 'uses' => 'ApiController@getPurgeOldCodes'));
 
 Route::get('/api/v1/user/lookup/{uuid}', array('uses' => 'ApiController@getTest'));
