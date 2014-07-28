@@ -45,3 +45,49 @@
     vertical-align: middle;
     margin-right: 10px;
 }
+
+#newmessages{
+    float: right;
+    font-size: 14px;
+    color: #007DBB;
+    cursor: pointer;
+    padding-top: 12px;
+}
+
+#showing{
+    float: left;
+}
+
+#pagination{
+    float: right;
+}
+
+#pagination .btn{
+    padding: 5px 10px;
+    margin: 2px 0;
+    font-size: 14px;
+    border-radius: 3px;
+    cursor: pointer;
+    border: 1px solid #92E0FE;
+    color: #379CFD;
+    background-color: white;
+}
+
+#pagination .btn.current{
+    background-color: #92CBFF;
+    border: 1px solid #5EB2FF;
+    color: white;
+}
+
+#pagination .btn:hover{
+    background-color: #92CBFF;
+    border: 1px solid #49AAEF;
+    color: #003E6A;
+}
+
+#pagination .btn.disabled, #pagination .btn.disabled:hover{
+    color: #BCBCBC;
+    border-color: #D7D7D7;
+    background-color: white;
+    cursor: default;
+}
