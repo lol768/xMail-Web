@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // Get mailbox
-    $.getJSON("/api/mailbox.php", UpdateMailbox);
+    $.getJSON(mailUrl, UpdateMailbox);
     $("body").on("click", "#mailbox tr", OpenMessage);
 });
 
@@ -22,5 +22,5 @@ function OpenMessage(e){
     e.preventDefault();
     
     var id = $(this).attr("data-mailid");
-    console.log(id);
+    console.log(id); // TODO
 }

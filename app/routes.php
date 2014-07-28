@@ -30,6 +30,7 @@ Route::post('/resendregcode', array('uses' => 'AuthController@postResendRegCode'
 
 // Mail functions
 Route::get('/mailbox', array('as' => 'mailbox', 'uses' => 'MailController@getMailbox'))->before('auth');
+Route::get('/mailbox/mail', array('as' => 'getMail', 'uses' => 'MailController@getMailboxMail'))->before('auth');
 
 // API functions
 Route::get('/api/v1/mcserver/{ip}/{port}/{token}', array('as' => 'mcserver', 'uses' => 'ApiController@getMcServer'));
