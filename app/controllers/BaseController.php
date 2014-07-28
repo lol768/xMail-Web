@@ -34,6 +34,23 @@ class BaseController extends Controller {
     // TODO: Perform update operations
     
     protected function userByUuid($uuid, $findByName=true){
+        $users = User::where('uuid', $uuid)->get();
+        
+        if($users->count() > 1){
+            // Multiple UUIDs? Oh no...
+            $now = new DateTime();
+            $now->setTimestamp(time());
+            foreach($users as $u){
+                // Check that the UUID belongs to this user
+                $expectedUuid = $this->uuid($u->name);
+                if($expectedUuid != $u->uuid){
+                    $u->uuid = $expectedUuid;
+                    $u->uuid_check = $now;
+                    $u->save();
+                }
+            }
+        }
+        
         $user = User::where('uuid', $uuid)->first();
         if(!$user && $findByName){
             $user = $this->userByName($this->name($uuid), false);
@@ -42,6 +59,23 @@ class BaseController extends Controller {
     }
     
     protected function userByName($name, $findByUuid=true){
+        $users = User::where('name', $name)->get();
+        
+        if($users->count() > 1){
+            // Multiple names? Oh no...
+            $now = new DateTime();
+            $now->setTimestamp(time());
+            foreach($users as $u){
+                // Check that the name belongs to this user
+                $expectedName = $this->name($u->uuid);
+                if($expectedName != $u->name){
+                    $u->name = $expectedName;
+                    $u->uuid_check = $now;
+                    $u->save();
+                }
+            }
+        }
+        
         $user = User::where('name', $name)->first();
         if(!$user && $findByUuid){
             $user = $this->userByUuid($this->uuid($name), false);

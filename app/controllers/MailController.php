@@ -8,14 +8,14 @@ class MailController extends BaseController {
     public function getMailboxMail(){
         $mailbox = array();
         
-        $mailbox[0] = array("ID" => 1, "from" => "turt2live", "unread" => true, "sent" => "1 minute ago", "message" => $this->message());
-        $mailbox[1] = array("ID" => 2, "from" => "Hawkfalcon", "unread" => true, "sent" => "4 hours ago", "message" => $this->message());
-        $mailbox[2] = array("ID" => 3, "from" => "drtshock", "unread" => true, "sent" => "10:00 AM", "message" => $this->message());
-        $mailbox[3] = array("ID" => 4, "from" => "FlamingPaw", "unread" => true, "sent" => "Yesterday", "message" => $this->message());
-        $mailbox[4] = array("ID" => 5, "from" => "turt2live@turt2live.com", "unread" => false, "sent" => "July 5", "message" => $this->message());
-        $mailbox[5] = array("ID" => 6, "from" => "travpc@gmail.com", "unread" => true, "sent" => "June 13", "message" => $this->message());
-        $mailbox[6] = array("ID" => 7, "from" => "Notch", "unread" => false, "sent" => "January 13", "message" => $this->message());
-        $mailbox[7] = array("ID" => 8, "from" => "Dinnerbone", "unread" => false, "sent" => "Last year", "message" => $this->message());
+        $mailbox[0] = array("ID" => 1, "from" => "mbaxter", "unread" => true, "sent" => "1 minute ago", "message" => $this->message());
+        $mailbox[1] = array("ID" => 2, "from" => "mbaxter", "unread" => true, "sent" => "4 hours ago", "message" => $this->message());
+        $mailbox[2] = array("ID" => 3, "from" => "mbaxter", "unread" => true, "sent" => "10:00 AM", "message" => $this->message());
+        $mailbox[3] = array("ID" => 4, "from" => "mbaxter", "unread" => true, "sent" => "Yesterday", "message" => $this->message());
+        $mailbox[4] = array("ID" => 5, "from" => "matt@phozop.net", "unread" => false, "sent" => "July 5", "message" => $this->message());
+        $mailbox[5] = array("ID" => 6, "from" => "matt@phozop.net", "unread" => true, "sent" => "June 13", "message" => $this->message());
+        $mailbox[6] = array("ID" => 7, "from" => "mbaxter", "unread" => false, "sent" => "January 13", "message" => $this->message());
+        $mailbox[7] = array("ID" => 8, "from" => "mbaxter", "unread" => false, "sent" => "Last year", "message" => $this->message());
 
         // TODO: Make this not happen...
         $maxLength = 50;
@@ -37,7 +37,7 @@ class MailController extends BaseController {
         $username = $mailMessage["from"];
         if(strpos($username, '@') === FALSE){
             // Likely a valid minecraft username
-            $mailMessage["head"] = "https://minotar.net/avatar/".$username."/50";
+            $mailMessage["head"] = "https://minotar.net/helm/".$username."/50";
         }else{ 
             // Assuming email... if wer're wrong then at least gravatar will give us a generic icon to use.
             $gravatarhash = md5(strtolower(trim($username)));
@@ -51,6 +51,7 @@ class MailController extends BaseController {
     
     // TODO: Debug code remove
     private function message() {
+        return 'Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich Malkovich ';
         $length = rand(50, 300);
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';

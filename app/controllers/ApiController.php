@@ -31,6 +31,11 @@ class ApiController extends BaseController {
         return Response::json($result);
 	}
     
+    public function getTest($uuid){
+        $user = $this->userByUuid($uuid);
+        return $user->name . ' ' . $user->uuid;
+    }
+    
     public function getPurgeOldCodes($secret){
         $result = array();
         
