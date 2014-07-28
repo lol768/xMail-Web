@@ -6,7 +6,7 @@ Route::get('/about', array('as' => 'about', 'uses' => 'HomeController@getAbout')
 Route::get('/contact', array('as' => 'contact', 'uses' => 'HomeController@getContact'));
 Route::get('/download', array('as' => 'download', 'uses' => 'HomeController@getDownload'));
 Route::get('/terms', array('as' => 'terms', 'uses' => 'HomeController@getTerms'));
-Route::get('/privacy', array('as' => 'privacy', 'uses' => 'HomeController@getPrivacyPolicy'))->before('auth');
+Route::get('/privacy', array('as' => 'privacy', 'uses' => 'HomeController@getPrivacyPolicy'));
 Route::get('/servers', array('as' => 'servers', 'uses' => 'HomeController@getServers'));
 
 Route::get('/about/developers', array('as' => 'about_developers', 'uses' => 'HomeController@getAboutDevelopers'));
